@@ -1,0 +1,163 @@
+
+.parent
+{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+};
+
+.list-group
+{
+  width: 100% !important; 
+}
+
+.list-group-item
+{
+  width: 100% !important; 
+}
+
+
+html, body { 
+  width:100% !important; 
+  height:100% !important;
+
+
+  /* padding-bottom: 20px; */
+ 
+  overflow: hidden;
+  /* vertical-align: bottom; */
+
+}
+
+canvas { display:block; }
+
+* {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  outline: none !important; 
+  caret-color: red !important;
+  background: "transparent !important";
+  background-color: "transparent !important";
+  margin:0; 
+  padding:0;
+  box-sizing: border-box;
+  
+
+  /* firefox */
+  scrollbar-color: #888 #2e2c2c;
+  scrollbar-width: thin;
+
+}
+
+.blured
+{
+  font-weight: 100;
+  margin-left: 2px;
+  color: #fff;
+  pointer-events: none;
+  user-select: none;
+}
+
+
+.btn {
+  background-color: transparent; /* Blue background */
+  border: none; /* Remove borders */
+  padding: 12px 16px; /* Some padding */
+  font-size: 16px; /* Set a font size */
+  cursor: pointer; /* Mouse pointer on hover */
+}
+
+/* Darker background on mouse-over */
+.btn:hover {
+  opacity: 0.8;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #2e2c2c; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+@keyframes spin {
+  from {transform:rotate(0deg);}
+  to {transform:rotate(360deg);}
+}
+
+
+
+.shadow
+{
+  animation: spin 8s linear infinite;
+  box-shadow: rgba(24, 26, 27, 0.8) 0px 0px 10px 2px, rgba(0, 0, 0, 0.8) 0px 0px 10px 2px !important;
+}
+
+.shadow-no-animation
+{
+  box-shadow: rgba(24, 26, 27, 0.8) 0px 0px 10px 2px, rgba(0, 0, 0, 0.8) 0px 0px 10px 2px !important;
+}
+
+
+
+.shadow:hover
+{
+  opacity: 0.9;
+}
+
+.black
+{
+  background : rgb(24, 26, 27) !important; 
+}
+
+.muted {
+  color: #b5afa6;
+  font-weight: 100;
+  /* font-size: 20px; */
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  background-color: #181a1b !important;
+  }
+  
+
+.handle
+{
+  background-color: #5d4ea1;
+}
+
+.button1 {
+  opacity: 1;
+}
+
+.button1:hover {
+  opacity: 0.5;
+}
+
+@media only screen and (max-width: 430px) {
+  .muted {
+    font-size: 10px;
+  }
+
+  .heading {
+    font-size: 14px;
+  }
+}
+
+.MuiSelect-root.MuiSelect-select.MuiSelect-selectMenu.MuiInputBase-input.MuiInput-input
+{
+  color: darkgrey;
+}

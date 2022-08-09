@@ -1,0 +1,148 @@
+import React, { useEffect, useState,useCallback } from "react";
+import GraphDraw from "./components/graph/graph";
+
+import InputFunction from "./components/graph/function";
+import { Resizable } from "re-resizable";
+
+import "./App.css";
+
+import {
+  createDefaultSettings,
+  settings_prototype,
+} from "./components/settings/default_settings";
+
+import AddIcon from "@material-ui/icons/Add";
+import { Button } from "@material-ui/core";
+
+import { RandomColorGenerator } from "./components/graph/color";
+
+function App() {
+  const [size, setSize] = useState([400, 400]);
+  const [functions, setFunctions] = useState([[(x) => NaN, "red"]]);
+  const [selected, setSelected] = useState(null);
+
+  const generator = new RandomColorGenerator();
+
+  const [layerWidth, setLayerWidth] = useState(0);
+
+  const currentSettings = createDefaultSettings(settings_prototype);
+
+  useEffect(() => {
+    const width  = window.innerWidth;
+    const height = window.innerHeight;
+    setSize([width - layerWidth, height]);
+  }, [])
+
+
+  const handleResize = useCallback(() => {
+    const width  = window.innerWidth;
+    const height = window.innerHeight;
+    setSize([width - layerWidth, height]);
+  })
+
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [handleResize])
+
+
+  const maxWidth = 400;
+
+  return (
+    <div
+      className="App"
+      style={{
+        width: "100%",
+        height: "100%",
+        overflow: "hidden !important",
+      }}
+    >
+      <Resizable
+        onResize={(e, dir, elm) => {
+          let width = elm.getBoundingClientRect().width;
+          setLayerWidth(width);
+          setSize([window.innerWidth - width, window.innerHeight]);
+        }}
+        maxWidth={`${maxWidth}px`}
+        minWidth={"200px"}
+        maxHeight={"100vh"}
+        minHeight={"100vh"}
+        defaultSize={{ width: 350, height: "100vh" }}
+        style={{ float: "left", width: "20%", height: "100vh" }}
+      >
+        <div
+          className="parent"
+          style={{
+            width: "100%",
+            height: "100%",
+            background: "#181a1b",
+            padding: "0 !important",
+            margin: "0 !important",
+            border: "1px solid rgba(33, 32, 31, 0.1)",
+          }}
+        >
+          <div
+            style={{
+              position: "relative",
+              width: "100%",
+              height: "48px",
+              background: "#202224",
+              border: "1px solid rgba(33, 32, 31, 0.1)",
+              // "borderRight": "none"
+            }}
+          >
+            <Button
+              onClick={() => {
+                setFunctions((prev) => [...prev, [(x) => NaN, "red"]]);
+              }}
+              style={{
+                position: "absolute",
+                left: 0,
+                color: "#40648d",
+                marginTop: "5px",
+              }}
+            >
+              <AddIcon />
+            </Button>
+          </div>
+
+          <div
+            style={{
+              width: "100%",
+              height: "calc(100% - 48px)",
+              overflow: "auto",
+            }}
+          >
+            {functions.map((func, index) => (
+              <InputFunction
+                generator={generator}
+                color={generator.randomColorFromPallete()}
+                key={index}
+                selected={selected}
+                setSelected={setSelected}
+                functions={functions}
+                setFunctions={setFunctions}
+                index={index}
+              />
+            ))}
+          </div>
+        </div>
+      </Resizable>
+
+      <div style={{ float: "none", overflow: "hidden", background: "red" }}>
+        <GraphDraw
+          canvasStyle={currentSettings}
+          functions={functions}
+          width={size[0]}
+          height={size[1]}
+        />
+      </div>
+
+      {/* <Settings 
+    
+     */}
+    </div>
+  );
+}
+
+export default App;
